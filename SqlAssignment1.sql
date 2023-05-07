@@ -57,7 +57,7 @@ update contacts set fname='niti' where fname='mili';
 
  select c.cust_name , c.city , c.grade ,s.name, s.city from customer c
  join saleman s on c.cust_id = s.cust_id
- where c.grade>100 order by c.cust_id asc;
+ where c.grade<100 order by c.cust_id asc;
  
 
 
