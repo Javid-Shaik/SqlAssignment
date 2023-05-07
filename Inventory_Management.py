@@ -251,10 +251,18 @@ class Inventory:
         print("Profit margin is : ",profit)
         crsr.close()
 
+    def databaseNotExists():
+        crsr = conn.cursor()
+        sql = "show databases"
+        crsr.execute(sql)
+        databses = crsr.fetchall()
+        for db  in databases:
+            if db[0]== "Inventory_Management":
+                return False
+        return True
 if __name__ == '__main__':
     print("----\tMENU\t----\n")
     print("""
-          1. Create Database\t \t\t
           3. Create Manufacture Table \t\t 4. Create Good Table\t
           5. Create Purchase Table\t\t 6. Create Sales Table
           7. Create defectiveItmes Table \t 8. Insert data into Goods Table
@@ -264,13 +272,13 @@ if __name__ == '__main__':
           15. Query for wooden chair\t\t 16. Profit of Wooden Table Products
           17. Exit\n""")
     i = Inventory
+    if i.databaseNotExists():
+        i.createDatabase()
     ch = 0
     i.useDatabase()
     while ch!=17:
         ch = int(input("Enter your choice : "))
-        if ch==1:
-            i.createDatabase() 
-        elif ch==3:
+        if ch==3:
             i.ManufacturerTable()
         elif ch==4:
             i.GoodsTable()
